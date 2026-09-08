@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Votes, VoteType } from '../../types/votes'
 import CafeInfo from '../CafeInfo/CafeInfo'
+import Notification from '../Notification/Notification'
 import VoteOptions from '../VoteOptions/VoteOptions'
 import VoteStats from '../VoteStats/VoteStats'
 import css from './App.module.css'
@@ -37,11 +38,15 @@ function App() {
         onReset={resetVotes}
         canReset={canReset}
       />
-      <VoteStats
-        votes={votes}
-        totalVotes={totalVotes}
-        positiveRate={positiveRate}
-      />
+      {totalVotes > 0 ? (
+        <VoteStats
+          votes={votes}
+          totalVotes={totalVotes}
+          positiveRate={positiveRate}
+        />
+      ) : (
+        <Notification />
+      )}
     </div>
   )
 }
